@@ -1,0 +1,40 @@
+{
+  "name": "daily-breeze",
+  "version": "1.0.0",
+  "description": "A MERN stack application to manage daily journals and tasks",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index",
+    "dev": "nodemon src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Om-252003/daily-breeze.git"
+  },
+  "keywords": [
+    "mern",
+    "daily-breeze",
+    "journal",
+    "task",
+    "management"
+  ],
+  "author": "Omsai Alladwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Om-252003/daily-breeze/issues"
+  },
+  "homepage": "https://github.com/Om-252003/daily-breeze#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.1",
+    "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
