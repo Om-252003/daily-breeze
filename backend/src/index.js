@@ -7,7 +7,13 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+// app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+// to remove cors error
+app.use(cors());
+header ('Access-Control-Allow-Origin: *');	
+header ('Access-Control-ALlow-Methods: POST, GET, OPTIONS, PUT, DELETE');	
+header ('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');	
+
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
