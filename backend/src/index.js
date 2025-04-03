@@ -35,7 +35,6 @@
 //   });
 
 
-
 const express = require("express");
 const app = express();
 require("dotenv").config();
@@ -43,52 +42,45 @@ const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS Configuration
+// ✅ Correct CORS configuration for Vercel
 const corsOptions = {
-  origin: ["https://daily-breeze.vercel.app", "https://daily-breeze-1ooo.vercel.app"], // Allowed frontends
-  credentials: true, // Allow cookies to be sent with requests
+  origin: ["https://daily-breeze.vercel.app", "https://daily-breeze-1ooo.vercel.app"],
+  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Auth-Token"],
 };
-
 app.use(cors(corsOptions));
 
-// Handle Preflight Requests
+// ✅ Handle Preflight Requests (OPTIONS)
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://daily-breeze-1ooo.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Origin", "https://daily-breeze-1ooo.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
-
+  
   next();
 });
 
-// Import Routes
+// ✅ Import Routes
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const entryRoutes = require("./routes/entryRoutes");
 
-// Use Routes
+// ✅ Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/entries", entryRoutes);
 
-// Connect to Database and Start Server
+// ✅ Connect Database
 connectDB()
-  .then(() => {
-    console.log("✅ Database connected successfully!");
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`🚀 Server is running on port ${PORT}!`);
-    });
-  })
-  .catch((error) => {
-    console.log("❌ Database not connected! " + error);
-  });
+  .then(() => console.log("✅ Database connected successfully!"))
+  .catch((error) => console.error("❌ Database connection failed!", error));
+
+// ✅ Export app for Vercel (DO NOT use app.listen())
+module.exports = app;
