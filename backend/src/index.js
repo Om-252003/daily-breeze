@@ -47,7 +47,7 @@ app.use(cookieParser());
 
 // ✅ Correct CORS configuration for Vercel
 const corsOptions = {
-  origin: ["https://daily-breeze.vercel.app", "https://daily-breeze-1ooo.vercel.app"],
+  origin: ["*"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Auth-Token"],
